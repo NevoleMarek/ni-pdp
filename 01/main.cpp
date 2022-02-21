@@ -143,7 +143,12 @@ void Solver::solve(){
     this->solutions.clear();
     this->vertices = vector<int>(this->graph.size(), 0);
     float s = GetMyCPUTime();
-    bbDFS(0, 0, 0);
+    if(this->a * 2 == this->graph.size()){
+        this->vertices[0] = 1;
+        bbDFS(1, 1, 0);
+    }
+    else
+        bbDFS(0, 0, 0);
     float timeElapsed = GetMyCPUTime() - s;
     cout <<" "<< timeElapsed <<" "<< this->callCount<<" " << this->minCost << " "<< this->solutions.size() << endl;
     /*
