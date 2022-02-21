@@ -112,14 +112,6 @@ int Solver::computeCostIfRestInY(int i, vector<int> &vertices){
 }
 
 void Solver::bbDFS(int i, int n, int cost, vector<int> &vertices){
-    /*
-    cout <<"i: "<< i <<" n: "<< n <<endl;
-    for (auto &&p : this->vertices)
-    {
-        cout << p << " ";
-    }
-    cout << endl;
-    */
     if((unsigned int)(this->a - n + i) > vertices.size())
         return;
 
@@ -129,7 +121,7 @@ void Solver::bbDFS(int i, int n, int cost, vector<int> &vertices){
 
     if(n == this->a){
         cost = cost + computeCostIfRestInY(i, vertices);
-        if(cost < this->minCost)
+        if(cost <= this->minCost)
         #pragma omp critical
         {
             if(cost < this->minCost){
@@ -148,15 +140,21 @@ void Solver::bbDFS(int i, int n, int cost, vector<int> &vertices){
     if((cost + remainingCost) > this->minCost)
         return;
 
-    if(n < this->a){
+
+    #pragma omp task
+    {
         vertices[i] = 1;
         int newCost = cost + recomputeCostAfterAddingVertex(i, vertices);
         bbDFS(i+1, n+1, newCost, vertices);
     }
+    #pragma omp task
+    {
+        vertices[i] = 0;
+        int newCost = cost + recomputeCostAfterAddingVertex(i, vertices);
+        bbDFS(i+1, n, newCost, vertices);
+    }
 
-    vertices[i] = 0;
-    int newCost = cost + recomputeCostAfterAddingVertex(i, vertices);
-    bbDFS(i+1, n, newCost, vertices);
+    #pragma omp taskwait
 }
 
 void Solver::solve(){
@@ -168,49 +166,13 @@ void Solver::solve(){
     {
         #pragma omp single
         {
-            vector<pair<vector<int>,int>> tasks;
-            int depth = 4;
-            int i = 0;
-            queue<pair<vector<int>,int>> q;
-            q.push(make_pair(vector<int>(this->graph.size(), 0),0));
-            q.push(make_pair(vector<int>(),-1));
-            while(depth !=0){
-                auto p = q.front();
-                q.pop();
-                if(p.second != -1){
-                    auto v1 = p.first;
-                    auto v2 = p.first;
-                    v1[i] = 1;
-                    v2[i] = 0;
-                    if(depth == 1){
-                        tasks.push_back(make_pair(v1,p.second + 1));
-                        tasks.push_back(make_pair(v2,p.second + 1));
-                    }
-                    else{
-                        q.push(make_pair(v1,p.second + 1));
-                        q.push(make_pair(v2,p.second + 1));
-                    }
-                }
-                else{
-                    q.push(make_pair(vector<int>(),-1));
-                    i++;
-                    depth--;
-                }
+            vector<int> vertices = vector<int>(this->graph.size(), 0);
+            if(this->a * 2 == this->graph.size()){
+                vertices[0] = 1;
+                bbDFS(1, 1, 0, vertices);
             }
-            for (auto &&task : tasks)
-            {
-                #pragma omp task
-                {
-                    int n = 0;
-                    for (int i = 0; i < task.second; i++)
-                    {
-                        if(task.first[i] == 1)
-                            n++;
-                    }
-                    int cost = computeCost(task.second, task.first);
-                    bbDFS(task.second, n, cost, task.first);
-                }
-            }
+            else
+                bbDFS(0, 0, 0, vertices);
         }
     }
 
