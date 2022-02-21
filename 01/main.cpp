@@ -126,11 +126,9 @@ void Solver::bbDFS(int i, int n, int cost){
     if((cost + remainingCost) > this->minCost)
         return;
 
-    if(n < this->a){
-        this->vertices[i] = 1;
-        int newCost = cost + computeCost(i);
-        bbDFS(i+1, n+1, newCost);
-    }
+    this->vertices[i] = 1;
+    int newCost = cost + computeCost(i);
+    bbDFS(i+1, n+1, newCost);
 
     this->vertices[i] = 0;
     int newCost = cost + computeCost(i);
