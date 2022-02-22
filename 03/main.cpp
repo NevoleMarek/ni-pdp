@@ -123,13 +123,9 @@ void Solver::bbDFS(int i, int n, int cost, vector<int> &vertices){
     if((unsigned int)(this->a - n + i) > vertices.size())
         return;
 
-    if(cost > this->minCost){
-        return;
-    }
-
     if(n == this->a){
         cost = cost + computeCostIfRestInY(i, vertices);
-        if(cost < this->minCost)
+        if(cost <= this->minCost)
         #pragma omp critical
         {
             if(cost < this->minCost){
@@ -148,11 +144,11 @@ void Solver::bbDFS(int i, int n, int cost, vector<int> &vertices){
     if((cost + remainingCost) > this->minCost)
         return;
 
-    if(n < this->a){
-        vertices[i] = 1;
-        int newCost = cost + recomputeCostAfterAddingVertex(i, vertices);
-        bbDFS(i+1, n+1, newCost, vertices);
-    }
+
+    vertices[i] = 1;
+    int newCost = cost + recomputeCostAfterAddingVertex(i, vertices);
+    bbDFS(i+1, n+1, newCost, vertices);
+
 
     vertices[i] = 0;
     int newCost = cost + recomputeCostAfterAddingVertex(i, vertices);

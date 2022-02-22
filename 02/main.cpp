@@ -115,10 +115,6 @@ void Solver::bbDFS(int i, int n, int cost, vector<int> &vertices){
     if((unsigned int)(this->a - n + i) > vertices.size())
         return;
 
-    if(cost > this->minCost){
-        return;
-    }
-
     if(n == this->a){
         cost = cost + computeCostIfRestInY(i, vertices);
         if(cost <= this->minCost)
