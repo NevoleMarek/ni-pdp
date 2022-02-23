@@ -143,12 +143,11 @@ void Solver::bbDFS(int i, int n, int cost, vector<int> vertices){
         int newCost = cost + recomputeCostAfterAddingVertex(i, vertices);
         bbDFS(i+1, n+1, newCost, vertices);
     }
-    #pragma omp task
-    {
-        vertices[i] = 0;
-        int newCost = cost + recomputeCostAfterAddingVertex(i, vertices);
-        bbDFS(i+1, n, newCost, vertices);
-    }
+
+    vertices[i] = 0;
+    int newCost = cost + recomputeCostAfterAddingVertex(i, vertices);
+    bbDFS(i+1, n, newCost, vertices);
+
 
     #pragma omp taskwait
 }
