@@ -131,7 +131,7 @@ void Solver::bbDFS(int i, int n, int cost){
     bbDFS(i+1, n+1, newCost);
 
     this->vertices[i] = 0;
-    int newCost = cost + computeCost(i);
+    newCost = cost + computeCost(i);
     bbDFS(i+1, n, newCost);
 }
 

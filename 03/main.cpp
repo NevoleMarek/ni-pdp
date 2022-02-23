@@ -151,7 +151,7 @@ void Solver::bbDFS(int i, int n, int cost, vector<int> &vertices){
 
 
     vertices[i] = 0;
-    int newCost = cost + recomputeCostAfterAddingVertex(i, vertices);
+    newCost = cost + recomputeCostAfterAddingVertex(i, vertices);
     bbDFS(i+1, n, newCost, vertices);
 }
 
