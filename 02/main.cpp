@@ -137,7 +137,7 @@ void Solver::bbDFS(int i, int n, int cost, vector<int> vertices){
         return;
 
 
-    #pragma omp task
+    #pragma omp task if(i < this->graph.size()/4)
     {
         vertices[i] = 1;
         int newCost = cost + recomputeCostAfterAddingVertex(i, vertices);
