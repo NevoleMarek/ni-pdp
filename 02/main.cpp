@@ -42,7 +42,7 @@ private:
     int recomputeCostAfterAddingVertex(int i, vector<int> &vertices);
     int estimateRemainingCost(int i, vector<int> &vertices);
     int computeCostIfRestInY(int i, vector<int> &vertices);
-    void bbDFS(int i, int n, int cost, vector<int> &vertices);
+    void bbDFS(int i, int n, int cost, vector<int> vertices);
 public:
     Solver(int a, vector<vector<pair<int,int>>> &graph);
     void solve();
@@ -111,7 +111,7 @@ int Solver::computeCostIfRestInY(int i, vector<int> &vertices){
     return finalCost;
 }
 
-void Solver::bbDFS(int i, int n, int cost, vector<int> &vertices){
+void Solver::bbDFS(int i, int n, int cost, vector<int> vertices){
     if((unsigned int)(this->a - n + i) > vertices.size())
         return;
 
