@@ -9,6 +9,9 @@
 #define THREADS 1
 #endif
 
+#ifndef DEPTH
+#define DEPTH 4
+#endif
 
 using namespace std;
 
@@ -162,10 +165,15 @@ void Solver::solve(){
 
 
     vector<pair<vector<int>,int>> tasks;
-    int depth = 4;
+    int depth = DEPTH;
     int i = 0;
     queue<pair<vector<int>,int>> q;
-    q.push(make_pair(vector<int>(this->graph.size(), 0),0));
+    if(this->a * 2 == this->graph.size()){
+        q.push(make_pair(vector<int>(this->graph.size(), 0),1));
+    }
+    else
+        q.push(make_pair(vector<int>(this->graph.size(), 0),0));
+
     q.push(make_pair(vector<int>(),-1));
     while(depth !=0){
         auto p = q.front();
