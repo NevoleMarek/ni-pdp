@@ -1,0 +1,8 @@
+test/graf_40_13.txt 20 80.7996 9449 1
+test/graf_40_13.txt 20 42.4204 9449 1
+test/graf_40_13.txt 20 23.005 9449 1
+test/graf_40_13.txt 20 15.9021 9449 1
+test/graf_40_13.txt 20 12.8805 9449 1
+test/graf_40_13.txt 20 9.89749 9449 1
+test/graf_40_13.txt 20 8.42739 9449 1
+test/graf_40_13.txt 20 7.70968 9449 1
