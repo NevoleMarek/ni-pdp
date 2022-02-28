@@ -149,7 +149,7 @@ void Solver::bbDFS(int i, int n, int cost, vector<int> vertices){
     bbDFS(i+1, n, newCost, vertices);
 
 
-    #pragma omp taskwait
+
 }
 
 void Solver::solve(){
