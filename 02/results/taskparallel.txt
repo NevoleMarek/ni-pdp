@@ -1,8 +1,8 @@
-test/graf_40_13.txt 20 91.7926 9449 1
-test/graf_40_13.txt 20 74.6397 9449 1
-test/graf_40_13.txt 20 44.6615 9449 1
-test/graf_40_13.txt 20 34.9458 9449 1
-test/graf_40_13.txt 20 28.6922 9449 1
-test/graf_40_13.txt 20 13.358 9449 1
-test/graf_40_13.txt 20 11.4609 9449 1
-test/graf_40_13.txt 20 8.7301 9449 1
+test/graf_40_13.txt 20 101.073 9449 1
+test/graf_40_13.txt 20 64.2119 9449 1
+test/graf_40_13.txt 20 30.1649 9449 1
+test/graf_40_13.txt 20 23.4562 9449 1
+test/graf_40_13.txt 20 17.0654 9449 1
+test/graf_40_13.txt 20 11.896 9449 1
+test/graf_40_13.txt 20 9.53483 9449 1
+test/graf_40_13.txt 20 7.49698 9449 1
