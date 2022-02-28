@@ -262,8 +262,6 @@ void Solver::masterSolve(){
         if(pMinCost < this->minCost)
             this->minCost = pMinCost;
     }
-
-    cout << "Minimal cost: " << this->minCost << endl;
 }
 
 void Solver::slaveSolve(int i, vector<int> &vertices){
@@ -340,7 +338,7 @@ int main(int argc, char* argv[]){
         vector<vector<pair<int,int>>> graph = loadGraph(argv[1]);
         Solver solver(a, graph);
         solver.masterSolve();
-
+	cout << argv[1] << " " << solver.getMinCost() << " ";
         end = MPI_Wtime();
     }
     else
